@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>LookerStudio Gemini Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f4f4f4;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      color: #2a5d84;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 1rem;
+      background: #2a5d84;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4566;
+    }
+    pre {
+      background: white;
+      padding: 1rem;
+      margin-top: 1rem;
+      white-space: pre-wrap;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>💬 ฉันคือน้อลดิจิ วัน (Looker-Gemini)</h2>
+  <p>พิมพ์คำถามเกี่ยวกับข้อมูลใน dashboard ได้เลย เช่น:</p>
+  <ul>
+    <li>ยอดขายไตรมาส 3/2025 เป็นเท่าไหร่?</li>
+    <li>Top 3 sale ตอนนี้คือใครบ้าง?</li>
+  </ul>
+
+  <textarea id="question" placeholder="ใส่คำถามที่นี่..."></textarea>
+  <br />
+  <button onclick="askGemini()">ถามน้อลดิจิ วัน</button>
+  <pre id="answer">ผลลัพธ์จะปรากฏที่นี่...</pre>
+
+  <script>
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbzWVaWAn-nAXWG837i5dJMDPyaGJuvX4G4iHntsKn2ZSdNeDKkNurh2SgyXeNSeLstMKA/exec"; // ← ใส่ Web App URL จาก Apps Script
+
+    async function askGemini() {
+      const question = document.getElementById("question").value.trim();
+      if (!question) {
+        document.getElementById("answer").textContent = "กรุณาใส่คำถามก่อนค่ะ";
+        return;
+      }
+
+      document.getElementById("answer").textContent = "⏳ กำลังถามน้อลดิจิ วัน...";
+
+      try {
+        const res = await fetch(scriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: question })
+        });
+
+        const text = await res.text();
+        document.getElementById("answer").textContent = text;
+      } catch (err) {
+        document.getElementById("answer").textContent = "❌ เกิดข้อผิดพลาด: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
