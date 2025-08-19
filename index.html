@@ -43,11 +43,12 @@
 </head>
 <body>
 
-  <h2>💬 ฉันคือน้อลดิจิ วัน (Looker-Gemini)</h2>
+  <h2>💬 ฉันคือน้อลดิจิ วัน (Looker-Gemini_AT_Beta_0.7)</h2>
   <p>พิมพ์คำถามเกี่ยวกับข้อมูลใน dashboard ได้เลย เช่น:</p>
   <ul>
     <li>ยอดขายไตรมาส 3/2025 เป็นเท่าไหร่?</li>
     <li>Top 3 sale ตอนนี้คือใครบ้าง?</li>
+    <li>Project ใด PO แล้วบ้าง?</li>
   </ul>
 
   <textarea id="question" placeholder="ใส่คำถามที่นี่..."></textarea>
@@ -56,7 +57,7 @@
   <pre id="answer">ผลลัพธ์จะปรากฏที่นี่...</pre>
 
   <script>
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbzWVaWAn-nAXWG837i5dJMDPyaGJuvX4G4iHntsKn2ZSdNeDKkNurh2SgyXeNSeLstMKA/exec"; // ← ใส่ Web App URL จาก Apps Script
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbyLOAGpzQCXBM1Yn8rtmj_YZEx37pmKkl98-8mrtFf88mCQ-3VAxjqkR-GWfagqdwIi/exec"; // ← ใส่ Web App URL จาก Apps Script
 
     async function askGemini() {
       const question = document.getElementById("question").value.trim();
@@ -83,3 +84,4 @@
   </script>
 </body>
 </html>
+
